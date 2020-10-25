@@ -166,6 +166,6 @@ Data retrieved needs to be decode. While a simple `htmlspecialcharacter_decode()
 
 For the community editor, `fileReader` is used to convert files to their base64 reprisentation, as well as their temporary url representation, which i then pass to an image tag `src` to display the current selected image.
 
-A video walkthrough of these project is available:
+A video walkthrough of this project is available:
 
       https://youtu.be/OaaXgO6btcY
