@@ -165,3 +165,7 @@ For safety of data going into the database, tags are converted to their html spe
 Data retrieved needs to be decode. While a simple `htmlspecialcharacter_decode()` can do the job, for display, leaving it as a special character is safe, and so i made a utitlity javascript function for special character decode on demand, eg passing location data.
 
 For the community editor, `fileReader` is used to convert files to their base64 reprisentation, as well as their temporary url representation, which i then pass to an image tag `src` to display the current selected image.
+
+A video walkthrough of these project is available:
+
+      https://youtu.be/OaaXgO6btcY
