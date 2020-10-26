@@ -157,6 +157,6 @@ First of all, you should check google map javascript api, and samples are the be
 A video walkthrough of this project is available @:
 
 ```
-  https://youtu.be/OaaXgO6btcY
+  https://github.com/johnerry/How-to-build-Swiip
 
 ```
