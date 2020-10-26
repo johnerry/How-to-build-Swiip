@@ -30,11 +30,13 @@ It also aim to bring us together towards a goal of cleaning our community and ma
 
 **FRONT END**: You need to have a basic understanding of **HTML**, **CSS**, **JAVASCRIPT**, **REACT**, **REDUX** & **AXIOS**.
 
-\*\*BACK END: \*\*The back-end was built with good old **PHP** and **MYSQL**.
+**BACK END**: The back-end was built with good old **PHP** and **MYSQL**.
 
-This project was all writen and its source code pushed to github repo:  **@github.com/johnerry/swiip**   using vscode.
+This project was writen in facebook react library and its source code is avaible on github repo:  `https://github.com/johnerry/swiip`.
 
-\*\*OTHERS: \*\*Third party API's, plugins, packages and more used in this project include, PayStack API, Google Map API, Draft.js (for text editing). To see the list of packages used in this project, see the package.json file in the github project directory above. Last but not the least, i made use of some unicode characters, as well as fontawesome icons in this project.
+**OTHERS**: Third party API's, plugins, packages and more used in this project include, **PayStack API**, **Google Map API**, **Draft.js** (for text editing which is one of **facebook features** that can be integrated to React). To see the list of packages used in this project, see the package.json file in the github project directory above. Last but not the least, i made use of some unicode characters, as well as fontawesome icons in this project.
+
+**INTEGRALS**: The some templates used in this project is sourced from core-ui package. `CORE_UI` contains a list of templates for i.e toggles, breadcrumbs, input, modal etc. You can check their github repo to download, or on how to intall it here `https://github.com/coreui ` it can be installed using `npm install @coreui/coreui@ --save`
 
 ## **HOW I BUILD THE APP**
 
@@ -46,55 +48,44 @@ To set the record straight, i already had prior knowledge in html,css,javascript
 
 **Now lets get to the good stuff.......**
 
-First of all, i made wire frame connection of what i want for the project with good old paper and pen.
+## **1\. Make a wire frame connection of what you want for the project with good old paper and pen.**
 
-I proceeded to having a diagramatic representation of how the project will look like using my drafted wireframes on paper, i also had to check on other websites for ideas and different other mixes for this project.
+- Get some sheets and a pen and make a diagram on how the project connects together. For example, facebook. Your starting point will be the login page which is the landing page, having two input boxes for email and password. The next textual representation should be the home page. Containing top navigation bar, and a list of posts below.
+- After the textual representation, proceeded to having a diagramatic representation of how the project will look like from the drafted wireframes on paper, you can also check on other websites for further ideas to add to your own. This diagrams should be the boxes, input, placeholder post flow and others. For Swiip, it started with a login page, with self hiding register view depending on viewport, followed by the account page, containing an image view, and some list of input boxes. These pages need to be interconnected, one leads to the other, which provides a natural flow to your app. Also take note on responsive design patterns while creating this diagrams.
 
-Then i proceeded to the final diagram of how it will look like as a finished product. Meaning i drew multiple pages and how they are interconnected to each other. It doesn't need to be top notch designer work. Just simple lines, box sketches and sample text etc. And because i wanted a responsive design, i also take account of how it would look like on tablets and phones.
+## 2\. Proceed to making a demo representation in actual code
 
-Then, i moved to creating a sample design from my sketches using html and css. One thing i immediately realise is how inconvinient it is using react, due to its realoads and screen blanks when making too many concurrent changes at a time. You will essentially do so when building you design structure.
+- This means actually presenting your diagrams in actual code. This involves alot of css and html for now. The javascript comes later. For the login page,
 
-So, i made an external html and css file to test on my browser the frames and structure i built before copying, pasting and correcting its syntax like classname for example to a proper JSX syntax.
+`@media screen and (max-width: .....px) { ....}`
 
-I started by building a dashboard panel. With self hidding links on the left, dependent on:
+- The line of code above takes care of responsive activity, on the page. The viewport is already added in the project default files. You can create your css file in the root file directly and imported into `app.js` so it serves every other file and component you build. For a smooth design, you can opt to use other text editors apart from vscode and an external `.html, .css` file. The reason for this is the number of times React reloads to make sure it renders you changes. Using external files will make sure you can fully make design choices and reload it when you are done. Ones done, always make sure to change all HTML tag to their JSX equivalent.
+- For the login page, start with adding a margin, top and buttom to give it that centered feel, with a `div` surrounding the two input boxes and buttons. Give it each a class name and proceed to styling with css.
+- The next after the login page was the register page and message page. I figured this should be taken care of, as they are the open directories.
+- The `register.js` Uses tabs from `core-ui` template. You can check more on tabs from their tab.js file in their bundled app directories. Thes two tabs holds the customer and agent form. Since they share several input boxes together, you should assign this design to a variable and then include them in the full representation of thier form i.e Customer and agent form has a `phone` input field. Assign this to a variable like `let inputBox = <input......`, and after making the the two form fields, add it into it. `<form > <input > ...{inputBox}...</form>`
+- Proceed to making the dashboard, for the dashboard, it has a `DefaultHeader.js`, `DefaultFooter`, all imported to the `DefaultLayour.js` files. In the `DefaultLayout.js`, should be your side panel with a mapped list of route links. Immediately on the right is the containing `div` that every other routes are displayed in. Import your list of routes object array and map it withing a router `switch` to make sure only one route is shown at a time.
+- For the container tag that host every other routes, has a breadcrumb div that shows the root and subdirectories you are currently navigating. For more on how to use breadcrumbs, check `breadcrumb.js` in the core-ui folder directory.
 
-`@media screen and (max-width: .....px) { ....}`
+## 3\. Building the `account.js` template
 
-The dashboard also has an heading containing several permanent links and user image whose border was reduced to 50% for that circular feel.
+- Start by adding the html and css template. For the image view. Surrount an image tag by input label. The imput is of type files. This input==file tag should be hidden and the label tag that represent it can be styled accordingly. Create a `Ref` to the input tag and an `onChange` handler. In the `onChange` handler method, use a file reader function to get capture the image file selected. This `fileReader` is useful for converting images and more to their base64 equivalent which can then be passed into a json format, or creating a temporary url representation of the file you selected. Meaning, a url you can insert as the source to the invinsible image tag to display the image you selected. For more on fileReader, check `https://developer.mozilla.org/en-US/docs/Web/API/FileReader`
+- For every other thing below the image tag, their is a container and two seperte div with a max with of 20% and 80%. The first house the image representation of the input box, and the other house the input box, controlled by an `onChange` handler.
+- State inside the constructor methos hold the changes to each input boxes. This is thesame all through the other pages in the project.
+- For the community `index.js` Start by creating a markup of two or three colums wrapped inside a div, the columns hold each community details like the `image`, `fundNeeded`, `location` and `text`. the columbs or rather called cards uses `display: flexbox;` assigned a `flex: 1 1 auto` meaning they all maintain same height regardless of the `text.length` size in each. For more on the css styles used to make these column match each other in height and width with sepreration from each other, check the community_container list of style in the theme.css file.
 
-To prevent the use of javascript in controlling the closing and opening of the panel, i used a checkbox which is invisible but represented by a label image, and a div immediately below it which can then be controlled using CSS Selector class e.g  `~`   like an example below:
+## 4\. Handling redux store for the entire app
 
-`#_button:checked ~ .panel {`
+- Start by creating a store directory and having an `index.js` Your redux store should use a middleware and combineReducers() function that keeps each data seperate in one access store. Kind of like having multiple holders of different information and are accessed seperately. For this we have the `userData`, `communityData`, `orderData` and more...
+- Then moved to create initial state for these reducers, along with the actions to perform such as:
 
-`width: 10em;`
+`FETCH_COMMUNITY_DATA_SUCCESS` etc, that are then exported to the store which `combines` them for safe keeping and distribution between components that had the ` { connect } from'react-redux'` higher order imported. The `connect`, connects each component to the store and each components that requires information from the store is wrapped with connect, along with `dispatch` and `props` method that helps to send data, and get the latest information from the redux store when it arrives. This latest information is checked in the `componentDidUpdate` method and appropriate handling is done when a new change is captured.
 
-`}`
+## 5\. Creating a safe storage for the app that doesn't reset when the app refreshes
 
-The dashboard has a container `<div>` below the top nav bar and the right panel that all other routes can be displayed in using a `router switch` which ensures only one single route at a time.
+- For PHP equivalent of session_ in javascript, i used browser `localStorage`, and `sessionStorage` to storing some no critical data, such as token etc that accompanies axios requests to the server, which verifies it and return a new one. This locally stored non critical data also keeps a user logged in for the duration of their choice. Local, being forever and Session being for a single period till the page closes. It also identify user, routes (private and non private) which ensures no access to several forbidden routes for agents, customers and admins. It is essential that the app keeps some data used throught this app even if the user decides to reload for example. The states and redux store are reset to empty.
+- This stored data can be used to render the appropriate data when need. Example of this is getting the user email, token, image url and more.
 
-After building my dashboard, login page and register page using my own code, i realised there was a critical bug that needed me to keep overflow hidden in some tags even after assigning a 100% width. Mind you, this was not apparent when building these blocks in my external file. It was only after pasting it to react did i see this bug.
-
-So, i searched online for several admin react template and CoreUI strikes out for me. Since its admin template was strikenly close to what i had already built, so i installed it using:
-
-`npm install @coreui/coreui@ --save`
-
-This template is always updating and at the time of writing these, had release version 3.0.0, different from the version 2.5.8 i used in these project. While the update, they maintain thesame convention all through.
-
-I had gone through **core-ui** doc and source code to see how it works and make my changes. Finally, i deleted some files i did not need and that took care of my overflow bug. Although i did realised later that i could fix my bug using some reactstrap tags, which i use sparsely around this project. ReactStrap means React Bootstrap.
-
-At this point, i already made the design block for several pages that i needed. The register, message, login and dashboard pages was completed. I prefere to complete my design blocks with sample text etc, before adding functional code logics to it. Besides, i haven't started work on the back end yet. Doing the design before the logic also gives you an idea what data you will be needing down the line, and how to structure it.
-
-Only after those three pages did i decide to create a sample json response api to test the project flow. For this:
-
-i have a redux store the state using a middleware and combineReducers() function that keeps each data seperate in one access store.
-
-I then moved to create initial state for these reducers, along with the actions to perform such as:
-
-`FETCH_COMMUNITY_DATA_SUCCESS`
-
-etc, that are then exported to the store which combines them for safe keeping and distribution between components that had the ` { connect } from'react-redux'`
-
-For PHP equivalent of session_, i used browser localstorage, and sessionstorage to storing some no critical data, such as token etc that accompanies axios requests to the server, which verifies it and return a new one. This locally stored non critical data also keeps a user logged in for the duration of their choice. Local, being forever and Session being for a single period till the page closes. It also identify user, routes (private and non private) which ensures no access to several forbidden routes for agents, customers and admins.
+For example: `getAuthEmail()` gets the email text for the user, nd `getAuthToken()` gets the latest user token that accompanies each ajax request. Below check if these are set, once set, i means the user has been authenticated and already logged in. Onces authenticated, diplay the protected routes for the user, if not authenticated, log the user out.
 
 `render={(props) => (getAuthEmail() && getAuthUserType() ? (`
 
@@ -102,7 +93,9 @@ For PHP equivalent of session_, i used browser localstorage, and sessionstorage 
 
 `)`
 
-The routes are different for each users and so to ensure no mix of routes for customer, agent and admin, birth the function:
+## 6\. Creating seperate routes for each users (admin, agent, customer), so they do not access urls not assigned to them
+
+The routes are different for each users and so to ensure no mix of routes for customer, agent and admin, births this function:
 
 `routePicker(user_type, cusRoutes, agtRoutes, admRoutes) {`
 
@@ -118,54 +111,52 @@ The routes are different for each users and so to ensure no mix of routes for cu
 
 `}`
 
-Before actually mapping the return `route` inside `switch` in the container `div`
+- The route picker function, which list of routes are its arguments returns the list of available routes for that user. Before actually mapping the return `route` inside `switch` in the container `div` used in the `defaultLayout,js` file.
+- The routeList.js contains a bunch of routes imported in and structured objects inside an array, which is then exported to the defaultLayout to be mapped through in the switch statment inside the container div that shows all these routes. For list of routes, check `routeList.js`
+- After following the same convention in building the order page, summary and more, and including their route in the `routeList.js`, you can move to check on **PayStack**. Paystack is a simplified payment api you can integrate into your project for a simple payment platform. Their documentation is simple and straight forward for any use cases.
+- To start using Paystack, you can decided to create a seperate component for it. The inline-paystack api is easy to integrate. Start by dynamically creating a script file in the `componentDidMount` method using `document.createElement()` assigning its `src`  and appending it to windows.
+- Then create an onClick handler that initialise the `payWithPaytack()` function/method. For more on this function, check the payment directory in `https://github.com/johnerry/Swiip` where this project source code is hosted, or check the doc directly on `https://paystack.com` for more information.
+- For the backend, i used php and mysqli, you can opt for anything that suites you. If you are familiar with firebase, you can use that as well, but this tutorial only covers the front-end side of it, which is hosted at `https://github.com/johnerry/Swiip`
+- After creating a **database table**, if you are using php or other server side language, you can go back to the front end, and integrate **axios** for the ajax requests and then **redux** to store these data. Since these data varies i.e **account data**, **community data** etc and they all needed their seperated stored states, so use a middleware and several dispatch functions to handle different requests to the server.
+- For convinience sake, data snapped up at the `componentDidUpdate` returns token, while some do not. This is because, you can limit setting new token for critical changes you make, while navigating the app. For something as critical as making changes to your **account** data to **order** data and more requires this, while getting the list of **communities** from the server can omit this.
 
-After building the order page, summary and more, and including their route to the `routeList.js`, i stopped to google on **PayStack**.
+## 7\. Integrating google map
 
-Their documentation was relatively straight forward. It was as simple as registering, copy and pasting about 10 lines of javascript code, changing the public key to yours, and you have a payment platform.
+First of all, you should check google map javascript api, and samples are the best way to learn how they work. check it here:  `https://developers.google.com/maps/documentation/javascript/examples`
 
-After building several more pages, i moved towards building a proper backend. I used **procedural php** and **mysqli** all through, rather than classes for my own relative ease, since they both work thesame way.
+- For geoloaction, routes, map, imagery, etc, you will see all the samples, which makes it easy when trying to integrate one feature with the other. On this project SWIIP, you will see that imagery, routes and map are fused to work together, thats the power of google map. Its worth checking out.
+- To make locating customers easy, you should decided to integrate google maps to your project. That is because it give an accurate location through using users latitude and logitude calculations, and can also give route, and imagery of certain location to give a discriptive representation to the agent, what they should look out for, and how to pin point customers location without getting confused or calling them on their line for directions, they can simply follow the route given.
+- Once again, for more on google map, read on google map javascript api. They have samples for beter understanding and use cases.
+- One major issue with google map could be is its lack of React package, leaving this to a third party integration from a different source entirely. This source(s) lack better documentation and cannot be easily understood for my use case. Since React is javascript, and thirparty api uses their javascript documentation anyway, you should decide to use google map official javascript documentation, by dynamically creating the script on demand like the payStack api above.
 
-Then, i made a framework php file containing several functions that takes care of certain things like, **data sanitizing**, **encryption**, **decyption**, **file upload**, **database queries**, **token verification**, **payment verification** etc.
+## 8\. Use Links rather than anchor tags
 
-After creating a **database table**, i went back to the front end, integrating **axios** and **redux** to communicate and store data for these pages. Since these data varies i.e **account data**, **community data** etc and they all needed their seperated stored states, so used a middleware and several dispatch functions to handle different requests to the server.
+- Links are part of React. They are thesame with anchor tags in html but has added advantages or features. For example, they take care of routing, so that the page does not refresh like in using a normal anchor tag, and they can carrry alone with them seperate information know as props to the location they target.
+- One good usecase of this is in the mesage.js file in swiip project directory. Once a user registers, they are directed to the message.js which serves them the `props.data` information passed along in the `link` from `register.js` This also alows message.js to be used to serve other functions like password_reset as a default view, and congratulatory message in extension when the props.data is no longer available or the page must have been refreshed.
 
-You will notice that some request returns, snapped up at the `componentDidUpdate` returns token, while some do not. This is because, i limited token changes to critical changes you make while navigating the app. For something as critical as making changes to your **account**, to **order** and more requires this, while getting the list of **communities** do not.
+## 9\. Looping through each JSON object returned from the server for a listview display, i.e community list
 
-To make locating customers easy, i decided to integrate google maps to this project. That is because it give an accurate location through using ones latitude and logitude, and can also give route, and imagery of certain location to give a discriptive representation to agent, what they should look out for.
+- Each community is a JSON **object** inside an array and so should be **mapped** through to be displayed to the user. i.e `ArrayOfObject.map( call_back_function( each_object) { return <div> each_object.title </>})` maps through the list of object inside the array.
 
-For more on google map, read on google map javascript api. They have samples for beter understanding and use cases.
+## 10\. The order and order summary page
 
-One major **issue** with google map for me was the lack of documentation on its third party **react package** from a **different source** of cause. So, i decided to use their javascript documentation, by dynamically creating the script on demand.
+- In the order page, make use of localStorage to store the state of `orderQty`.  Meaning, with an increament and decreament button. This ensures the data always stay thesame even after a refresh. Then in the summary page, a payment button that initialise PayStack API component in the project and followed by a call back function in PayStack API that sends the information to the server for verification and storage.
 
-You can use:
+## 11\. Integrating the text editor used for editing the community list.
 
-`React.createElement`
+- First visit `https://draftjs.org` draftjs is a Facebook built feature that can be integrated to your React projects. This gives you a text editor like a mini word processor. It uses states to store its data, and histories. This can then be converted by using its `getCurrentState()` method from the editor. This currentState can then be converted to JSON object, suitable for database safekeeping. These object can also be converted to its text editor equivalent. 
+- A thirdparty package called drafttohtml used in this project converts draft object to html string. Of cause these string cannot be used in JSX, so the need to convert them to a valid JSX syntax is necessary. This was achieved using the nodePasser function in utitltyFunction.js in utils directory from the source code folder at `https://github.com/johnerry/Swiip`.
+- The community list which are limited to changes by the admin, needs a text editor and facebook Draft.js, or its equivalent css rapping of it, used in this project can be used in your projects, that is refering to `react-draft-wysiwyg` package.
 
-But for this project i decided to use `document.createElement` instead for no particular reason to worry about. They both do thesame thing.
+## 12\. Sending JSON string to the server for processing
 
-Navigating through several using `<Link>`  from react-router-dom rather than `<a>` tag, to prevent reload during routing url.
+- For sending request to the server throught this project,  `formData()` method in browsers was used, this let's you construct and send request like in a normal form in html with an action attribute. 
+- You should take not that **POST** data is almost equivalent of  **GET** , ony that it is more secure, invisible in the url, suitable for form data, but it still uses a url construct, athough not visible but it how it sends data too and also suitable for long length of information. Also take note that data could change once it gets to the server, even while using **POST** request. Things like `"+"` are represented as `" "`, this can create a bug in your app because, token, password or any text can contain things like this and you wouldn't want that to happen. So, you would need to `encodeURIComponent` for the JSON data sent to the server, and then decode it at the server.
+- For safety of data going into the database, things like html tags, quotes etc are converted to their html special characters and certain characters are escaped before being prepared and sent to the database. So, data retrieved from the database needs to be decode. While a simple `htmlspecialcharacter_decode()` can do the job in the php side before being sent to the browser, for display purposes, leaving it as a special character is termed safe, and prevent running conspicious scripts in your aplication. So, you can make use of a utitlity javascript function for special character decode on demand for certain necessary use case, eg passing location object which this function can convert its htmleqivalent of double quotes back to object string with quotes and then parse to JSON object used in google map.
 
-Each community is a JSON **object** inside an array and so are **mapped** through to be displayed to the user.
+A video walkthrough of this project is available @:
 
-For the order page, i made use of localStorage to store the state of `orderQty`. **With an increament and decreament button, a payment button that initialise PayStack API and followed by a call back function in PayStack API that sends the information to the server for verification and storage.
+```
+  https://youtu.be/OaaXgO6btcY
 
-For the community list which are limited to changes by the admin, i needed a text editor. Google gave me Draft.js.
-
-One major issue with **draft.js** was converting its object representation to JSX. Of cause they provided a function to convert **draft** to **raw** object and back, but nothing to convert **draft** to **HTML** or **JSX**. Further search got me to install `drafttohtml` dependency. Well, this returns a string **html** code, but JSX doesn't accept string **html** code.
-
-I found out i could use **dangeriouslyInsertHtml** but the name was scary enough for me to find another solution. Finally, i built my own function that maps through each tags *nodes*, style and props and returns a JSX valid syntax.
-
-For sending request to the server, i made use of `formData()`  in browsers, that let's your send request like in a normal form in html.
-
-I also noticed that data could change once it gets to the server, even while using **POST** request, it is an invisible sent url data afterall just like **GET**. Things like `"+"` are represented as `" "`, and so the need to `uriEncode` each data sent to the server.
-
-For safety of data going into the database, tags are converted to their html special characters and certain characters are escaped before being prepared and sent to the database.
-
-Data retrieved needs to be decode. While a simple `htmlspecialcharacter_decode()` can do the job, for display, leaving it as a special character is safe, and so i made a utitlity javascript function for special character decode on demand, eg passing location data.
-
-For the community editor, `fileReader` is used to convert files to their base64 reprisentation, as well as their temporary url representation, which i then pass to an image tag `src` to display the current selected image.
-
-A video walkthrough of this project is available:
-
-      https://youtu.be/OaaXgO6btcY
+```
